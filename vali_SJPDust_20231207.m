@@ -194,7 +194,3 @@ m_grid('XTick', 127:3:136, 'XTickLabels', [], 'YTick', 34:3:43, 'YTickLabels', [
        'tickdir', 'out', 'xlabeldir', 'middle','fontsize',10, 'backcolor',[1 1 1], 'box', 'on');
 
 print('-dpng','-r1000',['Class_AAI_SJPDust_20231207','.png'])
-
-sprintf('Acc=%f; POCD=%f, POFD=%f', Acc,POCD,POFD)
-
-disp('程序运行完毕！');
