@@ -1,7 +1,7 @@
 % % File     : vali_SJPDust_20231207.m
 % % Purpose  : 利用 Shi&Wang07方法对Sea of Japan地区结果进行验证
 % % Coded by : Yiwei Zhang
-% % Date     : 12-Jun-2025, 20,21-Sep-2024
+% % Date     : 20,21-Sep-2024
 % % Note     : 
 
 clear
