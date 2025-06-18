@@ -8,8 +8,8 @@ close all; clear; clc;
 
 %% 本论文方法
 % % 加载r
-load('KARDust_20211231\Rhor_385H_clip.mat');
-load('KARDust_20211231\Rhor_865_clip.mat');
+load('KARDust_20211231\Rhor_385H_cor_clip.mat');
+load('KARDust_20211231\Rhor_865_cor_clip.mat');
       
 % % 加载RC
 load('KARDust_20211231\Rhorc_385H_clip.mat');
