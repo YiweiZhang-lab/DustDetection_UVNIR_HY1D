@@ -10,35 +10,35 @@ clc;
 
 %% 本论文方法
 % % 加载r
-load('data\SJPDust_20231207\Rhor_385H.mat');
-load('data\SJPDust_20231207\Rhor_865.mat');
+load('SJPDust_20231207\Rhor_385H_rec.mat');
+load('SJPDust_20231207\Rhor_865_rec.mat');
       
 % % 加载RC
-load('data\SJPDust_20231207\Rhorc_385H.mat');
-load('data\SJPDust_20231207\Rhor_412.mat');
-load('data\SJPDust_20231207\Rhor_750.mat');
-load('data\SJPDust_20231207\Rhorc_865.mat');
+load('SJPDust_20231207\Rhorc_385H.mat');
+load('SJPDust_20231207\Rhor_412.mat');
+load('SJPDust_20231207\Rhor_750.mat');
+load('SJPDust_20231207\Rhorc_865.mat');
 
 
 % % 加载角度
-load('data\SJPDust_20231207\B3_Satellite_Zenith_Angle_rec.mat');
-load('data\SJPDust_20231207\B3_Sun_Zenith_Angle_rec.mat')
-load('data\SJPDust_20231207\B3_RAA_rec.mat')
+load('SJPDust_20231207\B3_Satellite_Zenith_Angle_rec.mat');
+load('SJPDust_20231207\B3_Sun_Zenith_Angle_rec.mat')
+load('SJPDust_20231207\B3_RAA_rec.mat')
 
-load('data\SJPDust_20231207\Satellite_Zenith_Angle_rec.mat');
-load('data\SJPDust_20231207\Sun_Zenith_Angle_rec.mat')
-load('data\SJPDust_20231207\RAA_rec.mat')
+load('SJPDust_20231207\Satellite_Zenith_Angle_rec.mat');
+load('SJPDust_20231207\Sun_Zenith_Angle_rec.mat')
+load('SJPDust_20231207\RAA_rec.mat')
 
 % % 加载经纬度
-load('data\SJPDust_20231207\Lon.mat');
-load('data\SJPDust_20231207\Lat.mat');
+load('SJPDust_20231207\Lon.mat');
+load('SJPDust_20231207\Lat.mat');
 
-VZA_UVI = B3_Satellite_Zenith_Angle_rec; VZA_UVI(VZA_UVI<0) = nan; 
-SZA_UVI = B3_Sun_Zenith_Angle_rec; SZA_UVI(VZA_UVI<0) = nan;
+VZA_UVI = B3_Satellite_Zenith_Angle_rec; VZA_UVI(VZA_UVI<-900) = nan; 
+SZA_UVI = B3_Sun_Zenith_Angle_rec; SZA_UVI(VZA_UVI<-900) = nan;
 RAA_UVI = B3_RAA_rec;
 
-VZA_OCT = Satellite_Zenith_Angle_rec;  VZA_OCT(VZA_OCT<0) = nan;
-SZA_OCT = Sun_Zenith_Angle_rec;  SZA_OCT(SZA_OCT<0) = nan;
+VZA_OCT = Satellite_Zenith_Angle_rec;  VZA_OCT(VZA_OCT<-900) = nan;
+SZA_OCT = Sun_Zenith_Angle_rec;  SZA_OCT(SZA_OCT<-900) = nan;
 RAA_OCT = RAA_rec;
 
 xmus_UVI = cosd(SZA_UVI);
@@ -52,8 +52,6 @@ xmuv_OCT = cosd(VZA_OCT);
 xmup_OCT = cosd(RAA_OCT);
 xmud_OCT = -xmus_OCT.*xmuv_OCT-sqrt(1.-xmus_OCT.*xmus_OCT).*sqrt(1.-xmuv_OCT.*xmuv_OCT).*xmup_OCT;
 SCA_OCT = acosd(xmud_OCT); 
-
-
 
 %%
 Rhorc_i_385H(Rhorc_i_385H<0)=nan;  
@@ -97,7 +95,7 @@ m_gshhs('lc1', 'patch',[0.5 0.5 0.5],'edgecolor','k');
 m_grid('XTick', 127:3:136, 'XTickLabels', [], 'YTick', 34:3:43, 'YTickLabels', [], ...
        'tickdir', 'out', 'xlabeldir', 'middle','fontsize',10, 'backcolor',[1 1 1], 'box', 'on');
 
-print('-dpng','-r1000',['UVDAI_SJPDust_20231207','.png'])
+print('-dpng','-r600',['UVDAI_SJPDust_20231207','.png'])
 
 % ******************** 分类结果展示 *********************************
 % % 阈值为 r，UVDAI < r 则为沙尘气溶胶； UVDAI > r 则为清洁大气
@@ -135,7 +133,7 @@ m_gshhs('lc1', 'patch',[0.5 0.5 0.5],'edgecolor','k');
 m_grid('XTick', 127:3:136, 'XTickLabels', [], 'YTick', 34:3:43, 'YTickLabels', [], ...
        'tickdir', 'out', 'xlabeldir', 'middle','fontsize',10, 'backcolor',[1 1 1], 'box', 'on');
 
-print('-dpng','-r1000',['Class_UVDAI_SJPSDust_20231207','.png'])
+print('-dpng','-r600',['Class_UVDAI_SJPSDust_20231207','.png'])
 
 %% ********************* ShiWang07 论文方法 ***************************
 Ab = Rhorc_i_412 ./ Rhorc_i_865 .* exp(-453/115 * log(Rhorc_i_750 ./ Rhorc_i_865));
@@ -159,7 +157,7 @@ m_gshhs('lc1', 'patch',[0.5 0.5 0.5],'edgecolor','k');
 m_grid('XTick', 127:3:136, 'XTickLabels', [], 'YTick', 34:3:43, 'YTickLabels', [], ...
        'tickdir', 'out', 'xlabeldir', 'middle','fontsize',10, 'backcolor',[1 1 1], 'box', 'on');
 
-print('-dpng','-r1000',['AAI_SJPDust_20231207','.png']);
+print('-dpng','-r600',['AAI_SJPDust_20231207','.png']);
 
 % % % % % % % % % % % % % % % 分类结果展示 % % % % % % % % % % % % %
 % % 阈值为 r2，AAI < r2 则为沙尘气溶胶； AAI > r2 则为清洁大气
@@ -180,7 +178,6 @@ mycmap2(len1:end, 2) = 0.99;
 mycmap2(len1:end, 3) = 0.07;
 
 figure(); clf;
-
 m_proj('miller cylindrical','lat',[34.00 43.00],'lon',[127.00 137.00]);
 m_pcolor(Lon, Lat, Ab_Cld);
 shading interp;
@@ -193,4 +190,4 @@ m_gshhs('lc1', 'patch',[0.5 0.5 0.5],'edgecolor','k');
 m_grid('XTick', 127:3:136, 'XTickLabels', [], 'YTick', 34:3:43, 'YTickLabels', [], ...
        'tickdir', 'out', 'xlabeldir', 'middle','fontsize',10, 'backcolor',[1 1 1], 'box', 'on');
 
-print('-dpng','-r1000',['Class_AAI_SJPDust_20231207','.png'])
+print('-dpng','-r600',['Class_AAI_SJPDust_20231207','.png'])
