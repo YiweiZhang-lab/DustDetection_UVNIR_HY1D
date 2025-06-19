@@ -1,5 +1,8 @@
+Perform sensitivity analysis using simulated data. The synthetic dataset can be find at https://doi.org/10.5281/zenodo.15688617.
+The processing steps are:
 1. sensiAnaly1.m
-2. sensiAnaly2_FigX.m
+2. sensiAnaly2_Fig<1-4>.m
+Note that not all the sensitivity analysis results are presented in our manuscript.
 
 
 
